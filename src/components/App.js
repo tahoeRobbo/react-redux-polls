@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 
 import Dashboard from './Dashboard'
+import Leaderboard from './Leaderboard'
 import LoadingBar from 'react-redux-loading'
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
           ? null
           : <Dashboard />
         }
+      <Leaderboard />
       </div>
     )
   }
