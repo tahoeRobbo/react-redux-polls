@@ -19,12 +19,13 @@ export default function usersReducer (state = {}, action) {
 
       }
     case ADD_ANSWER:
-      const { authedUser} = action.authedUser
+      const user = state[action.authedUser]
+
       return {
         ...state,
-        [authedUser]: {
-          ...state[authedUser],
-          answers: state[authedUser].answers.concat(action.id)
+        [action.authedUser]: {
+          ...user,
+          answers: user.answers.concat([action.id])
         }
       }
     default:
