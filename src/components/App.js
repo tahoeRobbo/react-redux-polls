@@ -1,11 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
+import { BrowserRouter as  Router, Route, Switch} from 'react-router-dom'
+
 import { handleInitialData } from '../actions/shared'
 
 import Dashboard from './Dashboard'
 import Leaderboard from './Leaderboard'
 import AddPoll from './AddPoll'
 import Poll from './Poll'
+import Nav from './Nav'
 import LoadingBar from 'react-redux-loading'
 
 class App extends Component {
@@ -17,13 +20,23 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <LoadingBar />
-        {this.props.loading === true
-          ? null
-          : <Poll match={{params: {id: "6ni6ok3ym7mf1p33lnez"}}}/>
-        }
-      </div>
+      <Router>
+        <Fragment>
+          <LoadingBar />
+          <div className='container'>
+            <Nav />
+            {this.props.loading === true
+              ? null
+              : <div>
+                  <Route exact path='/' component={Dashboard} />
+                  <Route path='/leaderboard' component={Leaderboard} />
+                  <Route path='/polls/:id' component={Poll} />
+                  <Route path='/add' component={AddPoll} />
+                </div>
+            }
+          </div>
+        </Fragment>
+      </Router>
     )
   }
 }
